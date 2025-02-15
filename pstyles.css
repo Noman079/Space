@@ -1,0 +1,193 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+body {
+    background: black;
+    overflow-x: hidden;
+}
+
+/* PLANET SECTION */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    position: relative;
+}
+
+.heading {
+    font-size: 24px;
+}
+
+.details {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.right {
+    width: 100%;
+    max-width: 550px;
+    margin-right: 24px;
+}
+
+/* Planet Image Animation */
+.planet img {
+    width: auto;
+    height: 250px;
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 1s ease-in-out;
+}
+
+/* Text Animation */
+.right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 1s ease-in-out;
+}
+
+/* When in view */
+.show .planet img {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.show .right {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Bouncing effect */
+.planet img {
+    animation: bounce 800ms infinite alternate-reverse;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(8px);
+    }
+    100% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Parallax Backgrounds for Each Planet */
+section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100vw;
+}
+
+
+/* planets sections */
+
+#third {
+  position: relative;
+  background: radial-gradient( #c03d06 30%, #000 70%);
+  height: 100vh;
+  display: flex; 
+}
+
+#fourth {
+  position: relative;
+  background: radial-gradient( #c01906 30%, #000 70% );
+  height: 100vh;
+  display: flex;
+}
+
+
+#fifth {
+  position: relative;
+  background: radial-gradient( #06a1c0 30%, #000 65%);
+  height: 100vh;
+  display: flex;
+}
+
+#sixth {
+  position: relative;
+  background: radial-gradient( #fc4c00 30%, #000 65% );
+  height: 100vh;
+  display: flex;
+}
+
+#seventh {
+  position: relative;
+  background: radial-gradient( #f8b294 30%, #000 65% );
+  height: 100vh;
+  display: flex;
+}
+
+#eighth {
+  position: relative;
+  background: radial-gradient( #e5c0b0 30%, #000 65%  );
+  height: 100vh;
+  display: flex;
+}
+
+#ninth {
+  position: relative;
+  background: radial-gradient( #bb2c01 30%, #000 65% );
+  height: 100vh;
+  display: flex;
+}
+
+#tenth {
+  position: relative;
+  background: radial-gradient( #0046c8 30%, #000 65% );
+ 
+  height: 100vh;
+  display: flex;
+}
+
+
+#eleventh {
+  position: relative;
+  background: radial-gradient( #4a2500 30%, #000 65% );
+  height: 100vh;
+  display: flex;
+}
+
+section {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to top, #000,transparent);
+  z-index: 1000;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .right {
+        max-width: 100%;
+        margin: 16px auto;
+    }
+
+    .planet img {
+        height: 200px;
+    }
+}

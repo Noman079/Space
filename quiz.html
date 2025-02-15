@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url(bg5.jpg) no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px #000000;
+
+            /* Centering */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        button:hover
+        {
+            background: linear-gradient(#2b1055, #7597de);
+            color: rgb(255, 255, 255);
+        }
+
+        .correct {
+            background-color: #4CAF50;
+        }
+
+        .wrong {
+            background-color: #FF5733;
+        }
+
+        #score {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #FFD700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h2 id="question">Loading question...</h2>
+        <div id="answers"></div>
+        <p id="feedback"></p>
+        <p id="score"></p>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Venus"],
+                answer: "Mars"
+            },
+            {
+                question: "What is the largest planet in our solar system?",
+                options: ["Earth", "Mars", "Jupiter", "Venus"],
+                answer: "Jupiter"
+            },
+            {
+                question: "Which galaxy do we live in?",
+                options: ["Andromeda", "Milky Way", "Whirlpool", "Sombrero"],
+                answer: "Milky Way"
+            },
+            {
+                question: "Which planet has the most moons",
+                options: ["Saturn", "Jupiter", "Uranus", "Neptune"],
+                answer: "Saturn"
+            },
+
+            {
+                question: "Who was the first person to walk on the Moon?",
+                options: ["Buzz Aldrin", "Yuri Gagarin", "Neil Armstrong", "Chris Hadfield"],
+                answer: "Neil Armstrong"
+            },
+
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const questionElement = document.getElementById("question");
+        const answersElement = document.getElementById("answers");
+        const feedbackElement = document.getElementById("feedback");
+        const scoreElement = document.getElementById("score");
+
+        function loadQuestion() {
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            answersElement.innerHTML = "";
+            feedbackElement.textContent = "";
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.addEventListener("click", () => checkAnswer(option, button));
+                answersElement.appendChild(button);
+            });
+            scoreElement.textContent = `Score: ${score}/${quizData.length}`;
+        }
+
+        function checkAnswer(selectedAnswer, button) {
+            const correctAnswer = quizData[currentQuestionIndex].answer;
+            if (selectedAnswer === correctAnswer) {
+                button.classList.add("correct");
+                feedbackElement.textContent = "Correct!";
+                feedbackElement.style.color = "#4CAF50";
+                score++;
+            } else {
+                button.classList.add("wrong");
+                feedbackElement.textContent = `Wrong! The correct answer is ${correctAnswer}.`;
+                feedbackElement.style.color = "#FF5733";
+            }
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizData.length) {
+                    loadQuestion();
+                } else {
+                    questionElement.textContent = "Quiz Completed!";
+                    answersElement.innerHTML = "";
+                    feedbackElement.textContent = "Thanks for playing!";
+                    scoreElement.textContent = `Final Score: ${score}/${quizData.length}`;
+                }
+            }, 2000);
+        }
+
+        loadQuestion();
+    </script>
+</body>
+
+</html>
